@@ -4,11 +4,16 @@ project(Boost-CMake)
 option(BOOST_DOWNLOAD_TO_BINARY_DIR "Prefer downloading Boost to the binary directory instead of source directory" OFF)
 option(BOOST_DISABLE_TESTS "Do not build test targets, even if building standalone" OFF)
 
-set(BOOST_URL "https://github.com/Orphis/boost-cmake/releases/download/v1.67.0/boost_1_67_0.tar.xz" CACHE STRING "Boost download URL")
-set(BOOST_URL_SHA256 "4256a98911fbc943f7d97aab5f14f2ecde5341d90c5c5441696b7d99425af8fd" CACHE STRING "Boost download URL SHA256 checksum")
+set(BOOST_URL "https://dl.bintray.com/boostorg/release/1.68.0/source/boost_1_68_0.tar.bz2" CACHE STRING "Boost download URL")
+set(BOOST_URL_SHA256 "7f6130bc3cf65f56a618888ce9d5ea704fa10b462be126ad053e80e553d6d8b7" CACHE STRING "Boost download URL SHA256 checksum")
 set(BOOST_ARCHIVE_DIRECTORY "" CACHE DIRECTORY "Use the specified local directory to search for boost archives instead of downloading them" )
 
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake/Modules)
+
+if (WIN32)
+set(CMAKE_STATIC_LIBRARY_PREFIX_CXX "lib")
+set(CMAKE_SHARED_LIBRARY_PREFIX_CXX "lib")
+endif()
 
 include(DownloadBoost)
 
